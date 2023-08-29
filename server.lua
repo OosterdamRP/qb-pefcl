@@ -3,7 +3,7 @@ local QBCore = exports["qbx-core"]:GetCoreObject()
 local function addCash(src, amount)
 	local Player = QBCore.Functions.GetPlayer(src)
 	if Config.ox_inventory then
-		exports.ox_inventory:addCash(src,amount)
+		exports.ox_inventory:AddItem(src, 'cash', amount)
 	else
 		Player.Functions.AddMoney("cash", amount)
 	end
@@ -12,7 +12,7 @@ end
 local function removeCash(src, amount)
 	local Player = QBCore.Functions.GetPlayer(src)
 	if Config.ox_inventory then
-		exports.ox_inventory:removeCash(src,amount)
+		exports.ox_inventory:RemoveItem(src, 'cash', amount)
 	else
 		Player.Functions.RemoveMoney("cash", amount)
 	end
@@ -21,7 +21,7 @@ end
 local function getCash(src)
 	local Player = QBCore.Functions.GetPlayer(src)
 	if Config.ox_inventory then
-		return exports.ox_inventory:getCash(src) or 0
+		return exports.ox_inventory:GetItem(src, 'cash') or 0
 	else
 		return Player.PlayerData.money["cash"] or 0
 	end
